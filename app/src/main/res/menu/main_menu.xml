@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_sort"
+        android:title="@string/menu_sort"
+        app:showAsAction="never">
+        <menu>
+            <group android:id="@+id/group_sort" android:checkableBehavior="single">
+                <item android:id="@+id/sort_date" android:title="DATA / ORA" />
+                <item android:id="@+id/sort_band" android:title="BANDA" />
+                <item android:id="@+id/sort_mode" android:title="MODO" />
+                <item android:id="@+id/sort_call" android:title="CALL" />
+                <item android:id="@+id/sort_note" android:title="NOTE" />
+                <item android:id="@+id/sort_lotw" android:title="LOTW" />
+                <item android:id="@+id/sort_qsl_sent" android:title="QSL SPED" />
+                <item android:id="@+id/sort_qsl_rcvd" android:title="QSL RIC" />
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_reverse"
+        android:title="@string/menu_reverse"
+        android:checkable="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_import"
+        android:title="@string/menu_import"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_clear"
+        android:title="@string/menu_clear"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
+</menu>
