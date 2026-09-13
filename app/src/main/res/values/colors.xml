@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#0B3D5C</color>
-    <color name="badge_ok">#1B7F4B</color>
+    <!-- conferme presenti: LoTW ricevuto, QSL spedita, QSL ricevuta -->
+    <color name="badge_ok">#1A5FB4</color>
+    <!-- conferme assenti -->
     <color name="badge_off">#8A8A8A</color>
+    <!-- campo NOTE nella lista -->
+    <color name="note_red">#C62828</color>
 </resources>
