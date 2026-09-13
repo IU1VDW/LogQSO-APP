@@ -36,7 +36,6 @@ class DetailActivity : AppCompatActivity() {
             "COMMENT" to "NOTE",
             "NOTES" to "NOTE (estese)",
             "LOTW_QSL_RCVD" to "LOTW",
-            "LOTW_QSL_SENT" to "LOTW (inviato)",
             "QSL_SENT" to "QSL SPED",
             "QSL_SENT_VIA" to "QSL SPED VIA",
             "QSL_RCVD" to "QSL RIC",
@@ -50,6 +49,9 @@ class DetailActivity : AppCompatActivity() {
             "OPERATOR" to "OPERATORE",
             "CONTEST_ID" to "CONTEST"
         )
+
+        /** Campi da non mostrare mai: tutti i QSO vengono caricati su LoTW. */
+        private val HIDDEN = setOf("LOTW_QSL_SENT")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +89,7 @@ class DetailActivity : AppCompatActivity() {
             container.addView(row(label, prettify(key, value)))
         }
 
-        val rest = map.keys.filter { it !in shown }.sorted()
+        val rest = map.keys.filter { it !in shown && it !in HIDDEN }.sorted()
         if (rest.isNotEmpty()) {
             container.addView(header("ALTRI CAMPI ADIF"))
             for (key in rest) container.addView(row(key, map[key] ?: ""))
@@ -99,10 +101,18 @@ class DetailActivity : AppCompatActivity() {
             value.substring(6, 8) + "/" + value.substring(4, 6) + "/" + value.substring(0, 4) else value
         "TIME_ON", "TIME_OFF" -> if (value.length >= 4)
             value.substring(0, 2) + ":" + value.substring(2, 4) else value
-        "LOTW_QSL_RCVD", "QSL_RCVD", "EQSL_QSL_RCVD" -> when (value.uppercase()) {
-            "Y", "V" -> "Confermato (${value.uppercase()})"
+        "LOTW_QSL_RCVD", "EQSL_QSL_RCVD" -> when (value.uppercase()) {
+            "Y", "V" -> "Confermato"
             "N" -> "No"
             "R" -> "Richiesto"
+            "I" -> "Ignora"
+            else -> value
+        }
+        // Qui si parla solo della QSL cartacea: "ricevuta", non "confermato".
+        "QSL_RCVD" -> when (value.uppercase()) {
+            "Y", "V" -> "Ricevuta"
+            "N" -> "No"
+            "R" -> "Richiesta"
             "I" -> "Ignora"
             else -> value
         }
