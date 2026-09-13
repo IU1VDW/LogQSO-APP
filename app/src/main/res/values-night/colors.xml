@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- stessi ruoli, tonalita' piu' chiare per il tema scuro -->
+    <color name="badge_ok">#82B1FF</color>
+    <color name="badge_off">#9E9E9E</color>
+    <color name="note_red">#FF8A80</color>
+</resources>
