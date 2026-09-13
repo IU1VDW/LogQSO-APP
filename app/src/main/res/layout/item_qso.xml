@@ -68,7 +68,7 @@
         android:layout_marginTop="2dp"
         android:textSize="13sp"
         android:textStyle="italic"
-        android:alpha="0.75"
+        android:textColor="@color/note_red"
         android:maxLines="2"
         android:ellipsize="end"
         android:visibility="gone"
