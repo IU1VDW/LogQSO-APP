@@ -49,6 +49,9 @@ class Qso(val fields: Map<String, String>) {
             firstOf("QSLMSG", "QSLMSG_INTL")
         ).filter { it.isNotEmpty() }.joinToString(" — ")
 
+    /** Paese (entita' DXCC) come lo scrive il programma di log. */
+    val country: String get() = firstOf("COUNTRY", "COUNTRY_INTL")
+
     val lotw: String get() = f("LOTW_QSL_RCVD").uppercase()
     val lotwSent: String get() = f("LOTW_QSL_SENT").uppercase()
     val qslSent: String get() = f("QSL_SENT").uppercase()

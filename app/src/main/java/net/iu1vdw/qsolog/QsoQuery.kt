@@ -27,6 +27,8 @@ data class Filters(
     val bands: Set<String> = emptySet(),
     val modes: Set<String> = emptySet(),
     val years: Set<String> = emptySet(),
+    /** Paesi scelti, nella grafia del log (il confronto ignora maiuscole/minuscole). */
+    val countries: Set<String> = emptySet(),
     val conf: ConfFilter = ConfFilter.ALL,
     val sort: SortField = SortField.DATE,
     /** Di base la lista parte dal QSO piu' recente. */
@@ -49,11 +51,14 @@ object QsoQuery {
 
     fun apply(source: List<Qso>, f: Filters): List<Qso> {
         val needles = f.text.trim().lowercase().split(' ').filter { it.isNotEmpty() }
+        val countriesUp = if (f.countries.isEmpty()) emptySet()
+        else f.countries.mapTo(HashSet()) { it.uppercase() }
 
         val filtered = source.filter { q ->
             if (f.bands.isNotEmpty() && q.band !in f.bands) return@filter false
             if (f.modes.isNotEmpty() && q.mode !in f.modes) return@filter false
             if (f.years.isNotEmpty() && q.year !in f.years) return@filter false
+            if (countriesUp.isNotEmpty() && q.country.uppercase() !in countriesUp) return@filter false
             when (f.conf) {
                 ConfFilter.ALL -> {}
                 ConfFilter.LOTW_OK -> if (!q.lotwConfirmed) return@filter false
@@ -102,4 +107,18 @@ object QsoQuery {
 
     fun yearsOf(list: List<Qso>): List<String> =
         list.map { it.year }.filter { it.isNotEmpty() }.distinct().sortedDescending()
+
+    /**
+     * Paesi presenti nel log, in ordine alfabetico. Le grafie che differiscono solo
+     * per maiuscole/minuscole vengono unite tenendo la prima incontrata.
+     */
+    fun countriesOf(list: List<Qso>): List<String> {
+        val seen = HashMap<String, String>()
+        for (q in list) {
+            val c = q.country
+            if (c.isEmpty()) continue
+            seen.putIfAbsent(c.uppercase(), c)
+        }
+        return seen.values.sortedBy { it.uppercase() }
+    }
 }

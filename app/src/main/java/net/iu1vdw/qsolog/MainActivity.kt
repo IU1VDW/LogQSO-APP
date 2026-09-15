@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chipBand: Chip
     private lateinit var chipMode: Chip
     private lateinit var chipYear: Chip
+    private lateinit var chipCountry: Chip
     private lateinit var chipConf: Chip
     private lateinit var counters: TextView
     private lateinit var list: RecyclerView
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         chipBand = findViewById(R.id.chipBand)
         chipMode = findViewById(R.id.chipMode)
         chipYear = findViewById(R.id.chipYear)
+        chipCountry = findViewById(R.id.chipCountry)
         chipConf = findViewById(R.id.chipConf)
         counters = findViewById(R.id.counters)
         list = findViewById(R.id.list)
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         chipBand.setOnClickListener { pickMulti("Banda", QsoQuery.bandsOf(all), filters.bands) { filters = filters.copy(bands = it); refresh() } }
         chipMode.setOnClickListener { pickMulti("Modo", QsoQuery.modesOf(all), filters.modes) { filters = filters.copy(modes = it); refresh() } }
         chipYear.setOnClickListener { pickMulti("Anno", QsoQuery.yearsOf(all), filters.years) { filters = filters.copy(years = it); refresh() } }
+        chipCountry.setOnClickListener { pickMulti("Paese", QsoQuery.countriesOf(all), filters.countries) { filters = filters.copy(countries = it); refresh() } }
         chipConf.setOnClickListener { pickConf() }
 
         loadLog { handleIntent(intent) }
@@ -200,7 +203,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun commit(newList: List<Qso>, message: String) {
         all = newList
-        filters = filters.copy(bands = emptySet(), modes = emptySet(), years = emptySet())
+        filters = filters.copy(
+            bands = emptySet(), modes = emptySet(), years = emptySet(), countries = emptySet()
+        )
         refresh()
         io.execute { LogStore.save(this, newList) }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
@@ -261,6 +266,7 @@ class MainActivity : AppCompatActivity() {
         chipBand.text = chipLabel(getString(R.string.chip_band), filters.bands)
         chipMode.text = chipLabel(getString(R.string.chip_mode), filters.modes)
         chipYear.text = chipLabel(getString(R.string.chip_year), filters.years)
+        chipCountry.text = chipLabel(getString(R.string.chip_country), filters.countries)
         chipConf.text = if (filters.conf == ConfFilter.ALL) getString(R.string.chip_conf) else filters.conf.label
 
         when {
