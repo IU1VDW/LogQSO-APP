@@ -17,7 +17,7 @@ Nominativo: IU1VDW.
   radiantistico (160 m → 10 m → 70 cm), non alfabetico.
 - **Ricerca libera** su tutti i campi del QSO: nominativo, note, locatore, paese, nome…
   Più parole = tutte devono comparire.
-- **Filtri rapidi**: banda, modo, anno (a scelta multipla) e conferme
+- **Filtri rapidi**: banda, modo, anno, paese (a scelta multipla) e conferme
   (solo confermati LoTW, solo non confermati, solo con QSL spedita/ricevuta, senza conferme).
 - **Dettaglio a schermo intero**: toccando una riga si vedono tutti i campi ADIF del QSO,
   prima quelli utili tradotti in italiano, poi tutto il resto. Testo selezionabile.
