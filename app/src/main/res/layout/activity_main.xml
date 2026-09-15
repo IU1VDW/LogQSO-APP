@@ -62,6 +62,13 @@
                 android:text="@string/chip_year" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/chipCountry"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chip_country" />
+
+            <com.google.android.material.chip.Chip
                 android:id="@+id/chipConf"
                 style="@style/Widget.Material3.Chip.Assist"
                 android:layout_width="wrap_content"
