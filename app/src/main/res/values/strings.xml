@@ -13,6 +13,7 @@
     <string name="chip_band">Banda</string>
     <string name="chip_mode">Modo</string>
     <string name="chip_year">Anno</string>
+    <string name="chip_country">Paese</string>
     <string name="chip_conf">Conferme</string>
     <string name="detail_title">Dettaglio QSO</string>
 </resources>
